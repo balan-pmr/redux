@@ -1,7 +1,7 @@
 import React, { useReducer, useRef } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {  addTopping, toggleGluten } from './pizzaSlice'
+import {  addTopping, removeTopping, toggleGluten } from './pizzaSlice'
 
 
 
@@ -20,9 +20,12 @@ function App() {
     }
   }
 
-  function removeTopping(topping){
-    let todoToppings = {...pizza.toppings}
+  function deleteTopping(topping){
     // todoToppings is an object like {0: 'Tomato', 1: 'Peperoni'}
+    console.log('removing topping: '+topping)
+    dispatch( removeTopping(topping) )
+    console.log(topping + ' removed.')
+    let todoToppings = {...pizza.toppings}
     console.log(todoToppings)
   }  
 
@@ -49,7 +52,7 @@ function App() {
           pizza.toppings.map(
             topping => (
               <div key={topping} >
-                {topping} <button onClick={ ()=> removeTopping(topping) } >Remove</button>
+                {topping} <button onClick={ ()=> deleteTopping(topping) } >Remove</button>
               </div>  
             )
           )
