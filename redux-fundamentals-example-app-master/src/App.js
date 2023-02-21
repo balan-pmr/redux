@@ -1,8 +1,9 @@
-import React, { useReducer, useRef } from 'react'
+import React  from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {  addTopping, removeTopping, toggleGluten } from './pizzaSlice'
 
+import Header from './layout/header';
 
 
 function App() {
@@ -47,12 +48,18 @@ function App() {
       </section>
 
       <section>
+        <Header/>
+      </section>
+
+      <section>
         <p>Pizza made with {pizza.gluten?'gluten.':' gluten free!'} </p>
         {
           pizza.toppings.map(
             topping => (
               <div key={topping} >
-                {topping} <button onClick={ ()=> deleteTopping(topping) } >Remove</button>
+                {topping} 
+                {topping !== 'Tomato'?  <button onClick={ ()=> deleteTopping(topping) } >Remove</button>  : <span></span> }
+
               </div>  
             )
           )
